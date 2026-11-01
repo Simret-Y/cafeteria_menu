@@ -10,7 +10,7 @@
 schema: "1"
 
 # Your working title. You may change it later; keep this file up to date.
-title: "Cafeteria-cafe menu and queue"
+title: "cafeteria-cafe menu and queue"
 
 # One sentence: "An app that helps [users] to [do what] so that [benefit]."
 summary: "A smart dining app that lets customers view daily menus, pre-order meals, and check real-time wait times to eliminate long café queues."
