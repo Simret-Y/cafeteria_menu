@@ -1,25 +1,15 @@
-# Copy this file to the root of your group's repository as project.yaml.
-# The course reads it with a program, so:
-# - keep every key exactly as it is spelled here; change only the values;
-# - put every value in double quotes;
-# - indent with spaces, never with tabs;
-# - list all four members, each starting with "- name:".
-# Check that GitHub shows the file without an error before you submit the
-# link to your repository.
 
 schema: "1"
 
-# Your working title. You may change it later; keep this file up to date.
-title: "cafeteria-cafe menu and queue"
+title: "cafeteria menu and queue"
 
-# One sentence: "An app that helps [users] to [do what] so that [benefit]."
 summary: "A smart dining app that lets customers view daily menus, pre-order meals, and check real-time wait times to eliminate long café queues."
 
 members:
-  - name: "Simret Yitbarek"              # full name, as in the student register
-    student_id: "UGR/7269/16"         # exactly as on your student ID card
-    email: "Simretyitbarek@gmail.com" # an address you read every day
-    github: "Simret-Y"            # your GitHub username, without @
+  - name: "Simret Yitbarek"              
+    student_id: "UGR/7269/16"         
+    email: "Simretyitbarek@gmail.com" 
+    github: "Simret-Y"            
   - name: "Yared Gebre"
     student_id: "UGR/3138/16"
     email: "yaredgebre120@gmail.com"
