@@ -3,7 +3,7 @@ schema: "1"
 
 title: "smart integrated cafeteria menu and order management system"
 
-summary: "A smart dining app that lets customers view daily menus, pre-order meals, and check real-time wait times to eliminate long café queues."
+summary: "An app that helps café customers to browse daily menus, pre-order meals, and check estimated waiting times so that they can save time and enjoy a more convenient dining experience."
 
 members:
   - name: "Simret Yitbarek"              
