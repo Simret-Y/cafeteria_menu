@@ -12,9 +12,9 @@ An app that helps café customers browse daily menus, place orders in advance, a
 | Name | Role |
 |---|---|
 | Simret Yitbarek | Team lead and application integration |
-| Yared Gebre | UI/UX and frontend development |
+| Meresiet Zekiros | UI/UX and frontend development |
 | Tinsae Aysheshim | Backend and database development |
-| Meresiet Zekiros | Testing, AI and device feature integration |
+| Yared Gebre | Testing, AI and device feature integration |
 
 Roles represent initial responsibilities. All members will contribute to coding, integration, and testing across the application layers.
 
