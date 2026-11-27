@@ -1,18 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/auth/providers/auth_providers.dart';
-import '../../features/auth/screens/login_screen.dart';
-import '../../features/auth/screens/register_screen.dart';
-import '../../features/cart/screens/cart_screen.dart';
-import '../../features/cart/screens/checkout_screen.dart';
-import '../../features/manager/screens/manager_dashboard_screen.dart';
-import '../../features/menu/screens/home_screen.dart';
-import '../../features/menu/screens/menu_details_screen.dart';
-import '../../features/orders/screens/order_tracking_screen.dart';
-import '../../features/qr_scanner/screens/qr_scanner_screen.dart';
-import '../../features/recommendations/screens/recommendations_screen.dart';
-import '../../features/staff/screens/staff_dashboard_screen.dart';
+import '../../features/auth/presentation/providers/auth_providers.dart';
+import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/register_screen.dart';
+import '../../features/cart/presentation/screens/cart_screen.dart';
+import '../../features/cart/presentation/screens/checkout_screen.dart';
+import '../../features/manager/presentation/screens/manager_dashboard_screen.dart';
+import '../../features/menu/presentation/screens/customer_home_screen.dart';
+import '../../features/menu/presentation/screens/menu_details_screen.dart';
+import '../../features/orders/presentation/screens/order_tracking_screen.dart';
+import '../../features/qr_scanner/presentation/screens/qr_scanner_screen.dart';
+import '../../features/recommendations/presentation/screens/recommendations_screen.dart';
+import '../../features/staff/presentation/screens/staff_dashboard_screen.dart';
 
 /// Route paths for the app.
 abstract final class AppRoutes {
@@ -49,7 +49,7 @@ GoRouter createAppRouter() => GoRouter(
     GoRoute(
       path: AppRoutes.home,
       name: 'home',
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const CustomerHomeScreen(),
     ),
     GoRoute(
       path: AppRoutes.menuDetails,

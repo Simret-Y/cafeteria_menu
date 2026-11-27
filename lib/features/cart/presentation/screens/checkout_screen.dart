@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/widgets/placeholder_screen.dart';
+import '../../../../core/widgets/placeholder_screen.dart';
 
 /// Placeholder checkout screen.
 ///

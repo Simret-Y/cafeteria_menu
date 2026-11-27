@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/widgets/app_bottom_nav.dart';
-import '../../../core/widgets/placeholder_screen.dart';
+import '../../../../core/widgets/app_bottom_nav.dart';
+import '../../../../core/widgets/placeholder_screen.dart';
 
-/// Placeholder home screen.
+/// Placeholder customer home screen.
 ///
 /// Owned by Meresiet (customer-facing UI). Replace with the real Home
 /// screen when ready — keep the file path and class name.
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class CustomerHomeScreen extends StatelessWidget {
+  const CustomerHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
