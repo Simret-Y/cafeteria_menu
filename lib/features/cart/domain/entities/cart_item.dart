@@ -1,3 +1,6 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Created so Member 2's Cart and Checkout screens can build and test
+// independently. Reconcile or replace with Tinsae's CartItem model once merged.
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../menu/domain/entities/menu_item.dart';

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/validators/form_validators.dart';
+import '../providers/auth_form_providers.dart';
 import '../providers/auth_providers.dart';
 
 /// Registration screen with form validation and prototype role assignment.
@@ -32,7 +33,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authProvider);
     final selectedRole = ref.watch(selectedRegisterRoleProvider);
     final obscurePassword = ref.watch(registerObscurePasswordProvider);
     final theme = Theme.of(context);
@@ -64,21 +64,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 24),
-                    if (authState.errorMessage != null) ...[
-                      Card(
-                        color: theme.colorScheme.errorContainer,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            authState.errorMessage!,
-                            style: TextStyle(
-                              color: theme.colorScheme.onErrorContainer,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                    ],
                     TextFormField(
                       key: const ValueKey('register_name_field'),
                       controller: _nameController,
@@ -100,8 +85,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
                       validator: FormValidators.email,
-                      onChanged: (_) =>
-                          ref.read(authProvider.notifier).clearError(),
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -149,7 +132,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         for (final role in UserRole.values)
                           ButtonSegment<UserRole>(
                             value: role,
-                            label: Text(role.label),
+                            label: Text(userRoleLabel(role)),
                           ),
                       ],
                       selected: {selectedRole},
@@ -184,15 +167,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) return;
 
-    final success = ref
-        .read(authProvider.notifier)
-        .registerAccount(
-          name: _nameController.text,
-          email: _emailController.text,
-          password: _passwordController.text,
-          role: role,
-        );
-    if (!success) return;
+    ref
+        .read(customerDisplayNameProvider.notifier)
+        .setName(_nameController.text);
+    ref.read(authProvider.notifier).signIn(role);
 
     switch (role) {
       case UserRole.customer:

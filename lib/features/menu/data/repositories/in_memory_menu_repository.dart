@@ -1,3 +1,6 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Created so Member 2's customer screens can build and test independently.
+// Reconcile or replace with Tinsae's InMemoryMenuRepository once merged.
 import '../../domain/entities/menu_item.dart';
 import '../../domain/repositories/menu_repository.dart';
 

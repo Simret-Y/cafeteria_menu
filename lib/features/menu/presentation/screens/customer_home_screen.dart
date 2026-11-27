@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/widgets/app_bottom_nav.dart';
+import '../../../auth/presentation/providers/auth_form_providers.dart';
 import '../../../auth/presentation/providers/auth_providers.dart';
 import '../../../cart/presentation/providers/cart_providers.dart';
 import '../../domain/entities/menu_item.dart';
@@ -17,7 +18,7 @@ class CustomerHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authProvider).currentUser;
+    final displayName = ref.watch(customerDisplayNameProvider);
     final categories = ref.watch(menuCategoriesProvider);
     final selectedCategory = ref.watch(selectedMenuCategoryProvider);
     final searchQuery = ref.watch(menuSearchQueryProvider);
@@ -49,6 +50,7 @@ class CustomerHomeScreen extends ConsumerWidget {
           IconButton(
             tooltip: 'Sign Out',
             onPressed: () {
+              ref.read(customerDisplayNameProvider.notifier).clear();
               ref.read(authProvider.notifier).signOut();
               context.go(AppRoutes.login);
             },
@@ -71,7 +73,7 @@ class CustomerHomeScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Welcome, ${user?.name ?? 'Customer'}!',
+                          'Welcome, ${displayName ?? 'Customer'}!',
                           style: theme.textTheme.titleMedium?.copyWith(
                             color: theme.colorScheme.onPrimaryContainer,
                             fontWeight: FontWeight.bold,
@@ -186,7 +188,10 @@ class _MenuItemCard extends ConsumerWidget {
     return Card(
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => context.push(AppRoutes.menuDetailsFor(item.id)),
+        onTap: () {
+          ref.read(selectedMenuItemIdProvider.notifier).select(item.id);
+          context.push(AppRoutes.menuDetails);
+        },
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Row(
@@ -248,8 +253,12 @@ class _MenuItemCard extends ConsumerWidget {
                         ),
                         const Spacer(),
                         TextButton(
-                          onPressed: () =>
-                              context.push(AppRoutes.menuDetailsFor(item.id)),
+                          onPressed: () {
+                            ref
+                                .read(selectedMenuItemIdProvider.notifier)
+                                .select(item.id);
+                            context.push(AppRoutes.menuDetails);
+                          },
                           child: const Text('View Details'),
                         ),
                         const SizedBox(width: 4),

@@ -1,3 +1,7 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Menu repository and catalog providers are temporary stubs so Member 2's
+// customer screens can build and test independently. Reconcile or replace with
+// Tinsae's menu providers once merged.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/in_memory_menu_repository.dart';
@@ -68,6 +72,20 @@ final filteredMenuItemsProvider = Provider<List<MenuItem>>((ref) {
 final menuItemByIdProvider = Provider.family<MenuItem?, String>((ref, itemId) {
   return ref.watch(menuRepositoryProvider).getMenuItemById(itemId);
 });
+
+/// Holds the currently selected menu item ID for [MenuDetailsScreen] without
+/// altering Simret's `AppRoutes.menuDetails` route definition.
+class SelectedMenuItemIdNotifier extends Notifier<String?> {
+  @override
+  String? build() => null;
+
+  void select(String itemId) => state = itemId;
+}
+
+final selectedMenuItemIdProvider =
+    NotifierProvider<SelectedMenuItemIdNotifier, String?>(
+      SelectedMenuItemIdNotifier.new,
+    );
 
 /// Tracks selected quantity per menu item on the Menu Details screen.
 class MenuDetailQuantityNotifier extends Notifier<Map<String, int>> {

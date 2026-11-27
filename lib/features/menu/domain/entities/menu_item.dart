@@ -1,3 +1,7 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Created so Member 2's customer screens can build and test independently.
+// Reconcile or replace with Tinsae's canonical MenuItem Freezed model once
+// merged.
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'menu_item.freezed.dart';

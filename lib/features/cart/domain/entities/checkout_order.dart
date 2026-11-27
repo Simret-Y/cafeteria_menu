@@ -1,3 +1,6 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Created so Member 2's Checkout screen can build and test independently.
+// Reconcile or replace with Tinsae's Order Freezed model once merged.
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'cart_item.dart';

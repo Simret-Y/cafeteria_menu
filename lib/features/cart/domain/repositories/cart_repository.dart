@@ -1,3 +1,6 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Created so Member 2's Cart and Checkout screens can build and test
+// independently. Reconcile or replace with Tinsae's CartRepository once merged.
 import '../../../menu/domain/entities/menu_item.dart';
 import '../entities/cart_item.dart';
 import '../entities/checkout_order.dart';

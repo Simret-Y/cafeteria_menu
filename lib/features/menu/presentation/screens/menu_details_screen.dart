@@ -11,15 +11,14 @@ import '../widgets/meal_visual.dart';
 /// Displays full details, availability, preparation time, and quantity
 /// selection for a single menu item.
 class MenuDetailsScreen extends ConsumerWidget {
-  const MenuDetailsScreen({super.key, this.itemId});
-
-  final String? itemId;
+  const MenuDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allItems = ref.watch(menuItemsProvider);
+    final selectedId = ref.watch(selectedMenuItemIdProvider);
     final effectiveId =
-        itemId ?? (allItems.isNotEmpty ? allItems.first.id : null);
+        selectedId ?? (allItems.isNotEmpty ? allItems.first.id : null);
     final item = effectiveId == null
         ? null
         : ref.watch(menuItemByIdProvider(effectiveId));

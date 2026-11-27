@@ -95,7 +95,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text("TODAY'S MENU"), findsOneWidget);
-      expect(find.text('Welcome, Henok Tadesse!'), findsOneWidget);
+      expect(find.text('Welcome, Customer!'), findsOneWidget);
     });
 
     testWidgets('RegisterScreen validates mismatched passwords and submits', (

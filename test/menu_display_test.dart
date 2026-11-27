@@ -97,7 +97,7 @@ void main() {
 
         expect(find.text('Checkout'), findsOneWidget);
 
-        // Validate checkout form requires phone number before placing order.
+        // Validate checkout form requires customer name and phone number.
         final placeOrderButton = find.byKey(
           const ValueKey('place_order_button'),
         );
@@ -105,8 +105,13 @@ void main() {
         await tester.tap(placeOrderButton);
         await tester.pumpAndSettle();
 
+        expect(find.text('Please enter your full name'), findsOneWidget);
         expect(find.text('Please enter your phone number'), findsOneWidget);
 
+        await tester.enterText(
+          find.byKey(const ValueKey('checkout_name_field')),
+          'Meresiet Zekiros',
+        );
         await tester.enterText(
           find.byKey(const ValueKey('checkout_phone_field')),
           '0911223344',

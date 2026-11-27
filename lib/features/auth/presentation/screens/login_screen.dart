@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/validators/form_validators.dart';
+import '../providers/auth_form_providers.dart';
 import '../providers/auth_providers.dart';
 
 /// Customer, staff, and manager login screen with form validation and
@@ -29,7 +30,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authProvider);
     final selectedRole = ref.watch(selectedLoginRoleProvider);
     final obscurePassword = ref.watch(loginObscurePasswordProvider);
     final theme = Theme.of(context);
@@ -67,32 +67,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    if (authState.errorMessage != null) ...[
-                      Card(
-                        color: theme.colorScheme.errorContainer,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.error_outline,
-                                color: theme.colorScheme.onErrorContainer,
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  authState.errorMessage!,
-                                  style: TextStyle(
-                                    color: theme.colorScheme.onErrorContainer,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
                     TextFormField(
                       key: const ValueKey('login_email_field'),
                       controller: _emailController,
@@ -105,8 +79,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         isDense: true,
                       ),
                       validator: FormValidators.email,
-                      onChanged: (_) =>
-                          ref.read(authProvider.notifier).clearError(),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
@@ -133,8 +105,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       ),
                       validator: FormValidators.password,
-                      onChanged: (_) =>
-                          ref.read(authProvider.notifier).clearError(),
                       onFieldSubmitted: (_) => _submitForm(selectedRole),
                     ),
                     const SizedBox(height: 10),
@@ -143,7 +113,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         for (final role in UserRole.values)
                           ButtonSegment<UserRole>(
                             value: role,
-                            label: Text(role.label),
+                            label: Text(userRoleLabel(role)),
                           ),
                       ],
                       selected: {selectedRole},
@@ -215,20 +185,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) return;
 
-    final success = ref
-        .read(authProvider.notifier)
-        .loginWithCredentials(
-          email: _emailController.text,
-          password: _passwordController.text,
-          role: role,
-        );
-    if (!success) return;
-
-    final signedInRole = ref.read(authProvider).role ?? role;
-    _navigateForRole(signedInRole);
+    ref
+        .read(customerDisplayNameProvider.notifier)
+        .setFromEmail(_emailController.text);
+    ref.read(authProvider.notifier).signIn(role);
+    _navigateForRole(role);
   }
 
   void _demoSignIn(UserRole role) {
+    ref.read(customerDisplayNameProvider.notifier).clear();
     ref.read(authProvider.notifier).signIn(role);
     _navigateForRole(role);
   }

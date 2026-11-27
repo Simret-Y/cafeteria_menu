@@ -20,7 +20,6 @@ abstract final class AppRoutes {
   static const String register = '/register';
   static const String home = '/home';
   static const String menuDetails = '/menu-details';
-  static String menuDetailsFor(String itemId) => '$menuDetails/$itemId';
   static const String cart = '/cart';
   static const String checkout = '/checkout';
   static const String orderTracking = '/order-tracking';
@@ -54,15 +53,8 @@ GoRouter createAppRouter() => GoRouter(
     ),
     GoRoute(
       path: AppRoutes.menuDetails,
-      name: 'menuDetailsRoot',
-      builder: (context, state) =>
-          MenuDetailsScreen(itemId: state.uri.queryParameters['id']),
-    ),
-    GoRoute(
-      path: '${AppRoutes.menuDetails}/:itemId',
       name: 'menuDetails',
-      builder: (context, state) =>
-          MenuDetailsScreen(itemId: state.pathParameters['itemId']),
+      builder: (context, state) => const MenuDetailsScreen(),
     ),
     GoRoute(
       path: AppRoutes.cart,
@@ -103,7 +95,9 @@ GoRouter createAppRouter() => GoRouter(
   // Prototype guard: send logged-out users to /login. This is role-based
   // prototype navigation only — not real authentication.
   redirect: (context, state) {
-    final auth = ProviderScope.containerOf(context).read(authProvider);
+    final auth = ProviderScope.containerOf(
+      context,
+    ).read(authProvider);
     final loggedIn = auth.isLoggedIn;
     final onAuthRoute =
         state.matchedLocation == AppRoutes.login ||

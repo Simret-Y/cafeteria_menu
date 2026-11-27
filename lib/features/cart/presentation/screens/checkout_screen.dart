@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/validators/form_validators.dart';
-import '../../../auth/presentation/providers/auth_providers.dart';
+import '../../../auth/presentation/providers/auth_form_providers.dart';
 import '../../../menu/presentation/widgets/meal_visual.dart';
 import '../../domain/entities/checkout_order.dart';
 import '../providers/cart_providers.dart';
@@ -27,7 +27,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   @override
   void initState() {
     super.initState();
-    final currentName = ref.read(authProvider).currentUser?.name ?? '';
+    final currentName = ref.read(customerDisplayNameProvider) ?? '';
     _nameController = TextEditingController(text: currentName);
   }
 

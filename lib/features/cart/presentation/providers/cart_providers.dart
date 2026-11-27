@@ -1,3 +1,7 @@
+// TEMPORARY INTEGRATION DEPENDENCY (Member 3 — Tinsae Aysheshim):
+// Created so Member 2's Cart and Checkout screens can build and test
+// independently. Reconcile or replace with Tinsae's cart and order Riverpod
+// providers once merged.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
