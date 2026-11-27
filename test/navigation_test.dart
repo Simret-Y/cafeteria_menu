@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cafeteria_app/main.dart';
 
 void main() {
-  testWidgets('App launches and shows login screen', (WidgetTester tester) async {
+  testWidgets('App launches and shows login screen', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const CafeteriaApp());
     await tester.pumpAndSettle();
 
@@ -97,6 +99,49 @@ void main() {
     await tester.tap(find.text('QR Scanner'));
     await tester.pumpAndSettle();
     expect(find.text('QR Scanner'), findsWidgets);
+  });
+
+  testWidgets('QR scanner screen loads for staff', (WidgetTester tester) async {
+    await tester.pumpWidget(const CafeteriaApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Continue as Staff'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('QR Scanner'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('QR Scanner'), findsWidgets);
+    expect(find.text('Start Camera'), findsOneWidget);
+  });
+
+  testWidgets('Manager dashboard loads menu management controls', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const CafeteriaApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Continue as Manager'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Manager Dashboard'), findsWidgets);
+    expect(find.text('Add Item'), findsOneWidget);
+    expect(find.text('Menu Items'), findsOneWidget);
+  });
+
+  testWidgets('Customer can open AI recommendations', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const CafeteriaApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Continue as Customer'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('AI Recommendations'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('AI Recommendations'), findsWidgets);
+    expect(find.text('Your preferences'), findsOneWidget);
   });
 
   testWidgets('All routes load without errors', (WidgetTester tester) async {
