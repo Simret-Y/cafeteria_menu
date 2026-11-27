@@ -11,10 +11,10 @@ An app that helps café customers browse daily menus, place orders in advance, a
 
 | Name | Role |
 |---|---|
-| Simret Yitbarek | Team lead and application integration |
-| Meresiet Zekiros | UI/UX and frontend development |
-| Tinsae Aysheshim | Backend and database development |
-| Yared Gebre | Testing, AI and device feature integration |
+| Simret Yitbarek | Core architecture, navigation and application integration |
+| Meresiet Zekiros | Customer-facing UI development (Login, Registration, Home, Menu, Cart and Checkout) |
+| Tinsae Aysheshim | Models, repositories, database logic and Riverpod state management |
+| Yared Gebre | Staff and Manager dashboards, QR Scanner and AI Recommendations |
 
 Roles represent initial responsibilities. All members will contribute to coding, integration, and testing across the application layers.
 
