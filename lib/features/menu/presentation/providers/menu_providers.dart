@@ -14,14 +14,49 @@ final menuRepositoryProvider = Provider<MenuRepository>(
 );
 
 /// All cafeteria menu items from the repository.
-final menuItemsProvider = Provider<List<MenuItem>>(
-  (ref) => ref.watch(menuRepositoryProvider).getMenuItems(),
+class MenuCatalogNotifier extends Notifier<List<MenuItem>> {
+  @override
+  List<MenuItem> build() => ref.read(menuRepositoryProvider).getMenuItems();
+
+  void setAvailability(String itemId, bool isAvailable) {
+    state = [
+      for (final item in state)
+        if (item.id == itemId)
+          item.copyWith(isAvailable: isAvailable)
+        else
+          item,
+    ];
+  }
+
+  void addItem(MenuItem item) {
+    state = [...state, item];
+  }
+
+  void updateItem(MenuItem item) {
+    state = [
+      for (final existing in state)
+        if (existing.id == item.id) item else existing,
+    ];
+  }
+
+  void removeItem(String itemId) {
+    state = state.where((item) => item.id != itemId).toList();
+  }
+}
+
+final menuItemsProvider = NotifierProvider<MenuCatalogNotifier, List<MenuItem>>(
+  MenuCatalogNotifier.new,
 );
 
 /// Available category filter labels, starting with 'All'.
-final menuCategoriesProvider = Provider<List<String>>(
-  (ref) => ref.watch(menuRepositoryProvider).getCategories(),
-);
+final menuCategoriesProvider = Provider<List<String>>((ref) {
+  final seen = <String>{};
+  final categories = <String>['All'];
+  for (final item in ref.watch(menuItemsProvider)) {
+    if (seen.add(item.category)) categories.add(item.category);
+  }
+  return List.unmodifiable(categories);
+});
 
 /// Active category filter selected on the Customer Home screen.
 class SelectedMenuCategoryNotifier extends Notifier<String> {
@@ -70,7 +105,10 @@ final filteredMenuItemsProvider = Provider<List<MenuItem>>((ref) {
 
 /// Looks up a single [MenuItem] by its ID.
 final menuItemByIdProvider = Provider.family<MenuItem?, String>((ref, itemId) {
-  return ref.watch(menuRepositoryProvider).getMenuItemById(itemId);
+  for (final item in ref.watch(menuItemsProvider)) {
+    if (item.id == itemId) return item;
+  }
+  return null;
 });
 
 /// Holds the currently selected menu item ID for [MenuDetailsScreen] without
