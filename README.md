@@ -237,30 +237,7 @@ This project is developed collaboratively by four Computer Science students.
 
 The project is being developed incrementally.
 
-### Milestone 1 – Application Prototype
 
-Current foundation includes:
-
-- Flutter project initialization.
-- Material 3 application theme.
-- Riverpod and GoRouter configuration.
-- Prototype role selection.
-- Navigation routes for the main application screens.
-- Reusable navigation components.
-- Placeholder screens for feature integration.
-- Initial navigation and application tests.
-
-### Planned Development
-
-- Complete customer-facing interfaces.
-- Implement staff and manager functionalities.
-- Integrate application data models and repositories.
-- Implement order management and QR verification.
-- Integrate backend services and Firebase.
-- Integrate AI-powered meal recommendations.
-- Perform application-wide testing and integration.
-
----
 
 ## 🎓 Academic Project
 
@@ -270,5 +247,4 @@ Developed as a collaborative university software engineering project.
 
 **Platform:** Flutter Mobile Application
 
-**Repository:** YOUR_REPOSITORY_URL
 
