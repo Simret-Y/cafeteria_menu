@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/auth/providers/auth_providers.dart';
+import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../router/app_router.dart';
 
 /// Role-aware bottom navigation bar.

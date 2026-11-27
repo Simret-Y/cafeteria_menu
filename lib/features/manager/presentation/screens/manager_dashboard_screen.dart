@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/widgets/app_bottom_nav.dart';
-import '../../../core/widgets/placeholder_screen.dart';
+import '../../../../core/widgets/app_bottom_nav.dart';
+import '../../../../core/widgets/placeholder_screen.dart';
 
 /// Placeholder manager dashboard screen.
 ///
