@@ -23,8 +23,8 @@
 - **Order tracking**: `OrderNotifier` converts `CheckoutOrder` to `Order`, tracks status
   (`placed -> preparing -> ready -> completed`). `OrderTrackingScreen` shows an animated
   status stepper, estimated wait time, order summary, and QR placeholder.
-- **Tests**: 38 unit and widget tests (18 order tests — Tinsae; login-validation and
-  menu-display tests — Meresiet; navigation test — Simret).
+- **Tests**: 43 unit and widget tests (18 order tests — Tinsae; login-validation and
+  menu-display tests — Meresiet; navigation test — Simret; 5 staff widget tests — Yared).
 - **Analyzer**: `flutter analyze --fatal-infos` — No issues found.
 - **`project.yaml`**: All four members listed with student IDs, emails, and GitHub usernames.
 
@@ -57,9 +57,9 @@
 - **Reviewed**: PR #3
 
 ### Yared Gebre
-- **Contributed**: Staff Dashboard, QR Scanner, Manager Dashboard, and Recommendations
-  stub screens (included in PR #3 by Meresiet with attribution)
-- **Reviewed**: PR #4
+- **Authored**: PR #5 (Staff Dashboard with order status management, Manager Dashboard
+  with menu controls prototype, 5 staff widget/unit tests)
+- **Reviewed**: PR #4 (Tinsae's order tracking)
 
 ---
 
@@ -69,8 +69,8 @@
 |-----------|--------|----------|
 | All proposed screens present and navigable | 3/3 | All 11 screens reachable via go_router; bottom nav switches by role; `/menu-details` detail route with item parameter. |
 | Feature-first structure; state in providers, not widgets | 2/2 | `lib/features/<feature>/{domain,data,presentation}` enforced across all features. No `setState` for app state; all state in Riverpod Notifiers. |
-| Tests present; analyzer and tests clean | 1/1 | `flutter analyze --fatal-infos`: No issues. `flutter test`: 38/38 pass. Output pasted below. |
-| Repository hygiene | 1/1 | 4 feature branches merged via 4 pull requests; conventional commit messages; `project.yaml` lists all 4 members; `proposal` tag present. |
+| Tests present; analyzer and tests clean | 1/1 | `flutter analyze --fatal-infos`: No issues. `flutter test`: 43/43 pass. Output pasted below. |
+| Repository hygiene | 1/1 | 5 feature branches merged via 5 pull requests; conventional commit messages; `project.yaml` lists all 4 members; `proposal` tag present. |
 | Individual oral check | -/3 | Assessed in lab session. |
 | **Total (self-assessed)** | **7/7** | (oral check excluded from self-score) |
 
@@ -102,7 +102,12 @@ $ flutter test
 00:00 +16: OrderNotifier (Riverpod) updateStatus changes status in Riverpod state
 00:00 +17: OrderNotifier (Riverpod) latestOrderProvider returns most-recently added order
 00:00 +18: OrderNotifier (Riverpod) activeOrdersProvider excludes completed orders
-00:06 +38: All tests passed!
+00:01 +19: StaffDashboardScreen widget tests shows empty-state message when there are no orders
+00:01 +20: StaffDashboardScreen widget tests shows order card when an order is tracked
+00:01 +21: StaffDashboardScreen widget tests ManagerDashboardScreen renders menu management section
+00:01 +22: StaffDashboardScreen widget tests OrderStatus.placed.isActive is true
+00:01 +23: StaffDashboardScreen widget tests OrderStatus.completed.isActive is false
+00:06 +43: All tests passed!
 ```
 
 ---
