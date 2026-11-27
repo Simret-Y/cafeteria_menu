@@ -165,7 +165,7 @@ class ManagerDashboardScreen extends ConsumerWidget {
                 if (name.isEmpty ||
                     description.isEmpty ||
                     price == null ||
-                    price < 0 ||
+                    price <= 0 ||
                     prep == null ||
                     prep < 1) {
                   return;
